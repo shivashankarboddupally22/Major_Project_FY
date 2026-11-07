@@ -181,6 +181,9 @@ This project is intended for educational and learning purposes.
   Modules : NEO-6M GPS, SIM800L GSM, MQ-3 (digital out), limit switch, 16x2 I2C LCD
   Libraries: LiquidCrystal_I2C, TinyGPSPlus
 */
+
+
+
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <SoftwareSerial.h>
