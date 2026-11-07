@@ -185,11 +185,8 @@ This project is intended for educational and learning purposes.
 #include <LiquidCrystal_I2C.h>
 #include <SoftwareSerial.h>
 #include <TinyGPS++.h>
-
-// ---------- LCD ----------
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// ---------- Pins ----------
 #define LIMIT_SWITCH 2   // to GND when pressed (impact)
 #define MQ3_PIN      3   // MQ-3 DO pin, LOW = alcohol detected
 
@@ -264,6 +261,7 @@ void loop() {
   while (gpsSerial.available()) gps.encode(gpsSerial.read());
 
   // ---- Accident detection ----
+  
   bool impact = (digitalRead(LIMIT_SWITCH) == LOW);
   if (impact && !accidentSent) {
     lcd.clear();
@@ -271,7 +269,8 @@ void loop() {
     alertBoth("Accident Alert!");
     accidentSent = true;
   }
-  if (!impact) accidentSent = false;       // re-arm after switch released
+  
+  if (!impact) accidentSent = false;      // re-arm after switch released
 
   // ---- Alcohol detection ----
   bool alcohol = (digitalRead(MQ3_PIN) == LOW);
@@ -281,7 +280,7 @@ void loop() {
     alertBoth("Alcohol Detected!");
     alcoholSent = true;
   }
-  if (!alcohol) alcoholSent = false;       // re-arm when air is clear
+  if (!alcohol) alcoholSent = false; // re-arm when air is clear
 
   // ---- Normal display ----
   lcd.clear();
